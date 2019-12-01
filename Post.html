@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <h1>Post</h1>
+        <label for="postTitle">Title</label>
+        <input type="text" id="postTitle" name="postTitle" placeholder="Enter your Title"><br>
+        <label for="description">Description</label>
+        <input type="textarea" id="description"name="description" placeholder="Enter your Description"><br>
+        <label for="pic">Upload a picture</label>
+        <input type="file" id="pic" name="pic" accept="image/*"><br>
+        <label for="tags">Tags</label>
+        <input type="text" id="tags"name="tags" placeholder="Enter your Tags"><br>
+        <label for="location">Enter your location or select current location</label> 
+
+        <input type="text" id="address" name="address" onkeyup="manualLocation()"><br>
+        <button name=" submitlocaltion" onclick="manualLocation()">Submit Location</button><br>
+
+        <button name="localtion" onclick="getLocation()">Get Current Location</button><br>
+        <input type="text" name="latitude" id="latitude" ><br>
+        <input type="text" name="longitude" id="longitude" ><br>
+        <input type="submit" value="Submit"> &nbsp; <input type="reset" value="Reset">
+    <script type="text/javascript">
+function manualLocation()
+{
+    var geocoder = new google.maps.Geocoder();
+    var address = document.getElementById("address").value;
+
+    
+    geocoder.geocode( { 'address': address}, function(results, status)
+    {
+        
+        if (status == google.maps.GeocoderStatus.OK) {
+            alert(address)
+            document.getElementById("latitude").value= results[0].geometry.location.lat();
+            document.getElementById("longitude").value= results[0].geometry.location.lng();
+            alert(results[0].geometry.location.lat());
+            
+            } 
+            alert(results[0].geometry.location.lat());
+
+        });
+    } 
+    function getLocation() {
+        if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(showPosition);
+        } 
+        else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+    function showPosition(position) {
+     document.getElementById("latitude").value=position.coords.latitude
+     document.getElementById("longitude").value=position.coords.longitude;
+    }
+
+</script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    </body>
+</html>
